@@ -1,0 +1,6 @@
+/vendor/
+composer.lock
+config.php
+/data/*
+/.idea/
+/load_data_*

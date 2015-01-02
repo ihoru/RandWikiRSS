@@ -1,0 +1,35 @@
+{
+    "name": "ihoru/randwikirss",
+    "description": "Generating RSS channel with random articles from Wikipedia every day",
+    "keywords": [
+        "RSS",
+        "wiki",
+        "Wikipedia",
+        "feed",
+        "article"
+    ],
+    "homepage": "https://github.com/ihoru/RandWikiRSS",
+    "type": "project",
+    "license": "MIT",
+    "time": "2015-01-02",
+    "version": "0.0.1",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Ihor Polyakov",
+            "email": "ihor.polyakov@gmail.com",
+            "homepage": "https://github.com/ihoru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "mibe/feedwriter": "~1.0",
+        "ihoru/wikirandom": "~1.0@dev",
+        "oleku/supervariable": "0.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
+    }
+}
