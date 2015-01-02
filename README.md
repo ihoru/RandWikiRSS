@@ -27,9 +27,15 @@ Supported languages are: de, en, es, fr, it, nl, pl, ru, ceb, sv, vi, war (subdo
 * [ihoru/wikirandom](//github.com/ihoru/wikirandom) (fork of [byteriot/wikirandom](//github.com/byteriot/wikirandom))
 * [oleku/supervariable](//github.com/oleku/supervariable)
 
+## Problems
+* Pictures can be huge!
+
 ## TODO list
 * support Wikiquote.org
 * add MySQL and file storage support (if needed?)
+
+## Example
+![Example for English version](http://bloho.ru/RandWikiRSS/example_en.png)
 
 ## Licence
 MIT
