@@ -14,6 +14,7 @@ require_once('Store.php');
 require_once('config.php');
 
 try {
+    $fp = null;
     $cur_time = time();
     $request = new \Oleku\SuperVarriable\Varriable($_GET);
     $rwrss = new RandWikiRSS($CONFIG);
@@ -23,6 +24,14 @@ try {
     if ($request->engine) {
         $rwrss->setEngine($request->engine);
     }
+    $lang = $rwrss->getLang();
+    $engine = $rwrss->getEngine();
+    try {
+        $wr = new WikiRandom($lang, false, $engine);
+    } catch (Exception $e) {
+        // don't do anything if there are wrong params
+        die($e->getMessage());
+    }
     $list = $rwrss->store()->getList($rwrss->config()->items_amount);
     $last_article_time = 0;
     foreach ($list as $item) {
@@ -30,8 +39,6 @@ try {
     }
     $next_generation = strtotime($rwrss->config()->article_period, $last_article_time);
     if ($next_generation <= $cur_time) {
-        $lang = $rwrss->getLang();
-        $engine = $rwrss->getEngine();
         $lock_fn = 'data/load_data_' . $engine . '_' . $lang . '.lock';
         $fp = fopen($lock_fn, 'w+');
         if (!$fp || !flock($fp, LOCK_EX)) {
@@ -44,7 +51,6 @@ try {
                 $list = $new_list;
                 break;
             }
-            $wr = new WikiRandom($lang, false, $engine);
             $count = $rwrss->config()->articles_amount;
             $add_items = array();
             $max_queries = 10;
@@ -93,6 +99,11 @@ try {
         unlink($lock_fn);
     }
 } catch (Exception $e) {
+    if ($fp) {
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        unlink($lock_fn);
+    }
     die($e->getMessage());
 }
 $title = $rwrss->config()->title;
