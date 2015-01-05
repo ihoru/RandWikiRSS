@@ -32,12 +32,6 @@ Supported "engines" are: pedia (wikipedia.org), quote (wikiquote.org)
 ## Example
 ![Example for English version](http://bloho.ru/RandWikiRSS/example_en.png)
 
-## Problems
-* Pictures can be huge! And they can be awfully shown in RSS-reader (i.e. feedly.com)
-
-## TODO list
-* add MySQL and file storage support (if needed?)
-
 ## Changes
 2015-01-05
 
