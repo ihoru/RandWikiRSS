@@ -1,7 +1,7 @@
 <?php
 
 $CONFIG = array();
-$CONFIG['title'] = 'Random article from Wikipedia.org';
+$CONFIG['title'] = 'Random article from %s';
 $CONFIG['description'] = 'New article every day';
 $CONFIG['url'] = 'https://github.com/ihoru/RandWikiRSS';
 $CONFIG['image_url'] = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rss-feed.svg/256px-Rss-feed.svg.png';

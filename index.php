@@ -95,9 +95,19 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+$title = $rwrss->config()->title;
+if (strpos($title, '%s') !== false) {
+    $domain = '';
+    if ($request->engine == 'quote') {
+        $domain = 'Wikiquote.org';
+    } else {
+        $domain = 'Wikipedia.org';
+    }
+    $title = sprintf($title, $domain);
+}
 
 $feed = new \FeedWriter\RSS2();
-$feed->setTitle($rwrss->config()->title);
+$feed->setTitle($title);
 $feed->setLink($rwrss->config()->url);
 $feed->setDescription($rwrss->config()->description);
 $feed->setImage($rwrss->config()->title, $rwrss->config()->url, $rwrss->config()->image_url);

@@ -1,10 +1,12 @@
 {
     "name": "ihoru/randwikirss",
-    "description": "Generating RSS channel with random articles from Wikipedia every day",
+    "description": "Generating RSS channel with random articles from Wikipedia/Wikiquote every day",
     "keywords": [
         "RSS",
         "wiki",
         "Wikipedia",
+        "Wikiquote",
+        "quote",
         "feed",
         "article"
     ],
