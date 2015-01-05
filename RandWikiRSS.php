@@ -16,7 +16,11 @@ class RandWikiRSS
     /**
      * @var string
      */
-    private $lang = '';
+    private $lang = 'en';
+    /**
+     * @var string
+     */
+    private $engine = 'pedia';
 
     /**
      * @param array $config
@@ -24,12 +28,14 @@ class RandWikiRSS
     function __construct(array $config)
     {
         $this->config = new \Oleku\SuperVarriable\Varriable($config);
-        if (!$this->config->default_language) {
-            throw new Exception('Wrong config.default_language param.');
-        }
-        $this->setLang($this->config->default_language);
+        $this->setLang($this->config->default_language ?: $this->lang);
+        $this->setEngine($this->config->default_engine ?: $this->engine);
     }
 
+    /**
+     * Inits storing object.
+     * @throws Exception
+     */
     private function storeInit()
     {
         if ($this->store) {
@@ -40,7 +46,7 @@ class RandWikiRSS
 //                $this->store = new MysqlStore($this->config->mysql);
 //                break;
             case 'sqlite3':
-                $this->store = new Sqlite3Store($this->config->sqlite3, $this->lang);
+                $this->store = new Sqlite3Store($this->config->sqlite3, $this->getLang(), $this->getEngine());
                 break;
 //            case 'file':
 //                $this->store = new FileStore($this->config->file);
@@ -51,7 +57,7 @@ class RandWikiRSS
     }
 
     /**
-     * @param $lang
+     * @param string $lang
      */
     public function setLang($lang)
     {
@@ -64,6 +70,28 @@ class RandWikiRSS
     public function getLang()
     {
         return $this->lang;
+    }
+
+    /**
+     * @param string $engine
+     */
+    public function setEngine($engine)
+    {
+        if (!in_array($engine, array(
+                'pedia',
+                'quote',
+            ))) {
+            $engine = 'pedia';
+        }
+        $this->engine = $engine;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEngine()
+    {
+        return $this->engine;
     }
 
     /**

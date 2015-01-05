@@ -20,6 +20,9 @@ try {
     if ($request->lang) {
         $rwrss->setLang($request->lang);
     }
+    if ($request->engine) {
+        $rwrss->setEngine($request->engine);
+    }
     $list = $rwrss->store()->getList($rwrss->config()->items_amount);
     $last_article_time = 0;
     foreach ($list as $item) {
@@ -28,7 +31,8 @@ try {
     $next_generation = strtotime($rwrss->config()->article_period, $last_article_time);
     if ($next_generation <= $cur_time) {
         $lang = $rwrss->getLang();
-        $lock_fn = 'data/load_data_' . $lang . '.lock';
+        $engine = $rwrss->getEngine();
+        $lock_fn = 'data/load_data_' . $engine . '_' . $lang . '.lock';
         $fp = fopen($lock_fn, 'w+');
         if (!$fp || !flock($fp, LOCK_EX)) {
             throw new Exception('Lock failed.');
@@ -40,7 +44,7 @@ try {
                 $list = $new_list;
                 break;
             }
-            $wr = new WikiRandom($lang, false);
+            $wr = new WikiRandom($lang, false, $engine);
             $count = $rwrss->config()->articles_amount;
             $add_items = array();
             $max_queries = 10;

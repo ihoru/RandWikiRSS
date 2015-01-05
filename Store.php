@@ -3,9 +3,11 @@
 abstract class Store
 {
     protected $lang = null;
-    function __construct(array $config, $lang)
+    protected $engine = null;
+    function __construct(array $config, $lang, $engine)
     {
         $this->lang = $lang;
+        $this->engine = $engine;
     }
     /**
      * @param int $number
@@ -22,22 +24,7 @@ abstract class Store
     abstract public function saveItem(array $data);
 }
 
-//class MysqlStore extends Store
-//{
-//    private $db;
-//
-//    function __construct(array $config, $lang)
-//    {
-//    }
-//
-//    public function getList($number = 0)
-//    {
-//    }
-//
-//    public function saveItem(array $data)
-//    {
-//    }
-//}
+//class MysqlStore extends Store {}
 
 class Sqlite3Store extends Store
 {
@@ -46,10 +33,10 @@ class Sqlite3Store extends Store
      * @var SQLite3
      */
     private $dbh = null;
-    function __construct(array $config, $lang)
+    function __construct(array $config, $lang, $engine)
     {
-        parent::__construct($config, $lang);
-        $file = $config['dir'].'store_'.$this->lang.'.db';
+        parent::__construct($config, $lang, $engine);
+        $file = $config['dir'].'store_'.$this->engine.'_'.$this->lang.'.db';
         $exists = file_exists($file);
         $this->dbh = new SQLite3($file);
         if (!$exists || !filesize($file)) {
@@ -86,17 +73,4 @@ class Sqlite3Store extends Store
     }
 }
 
-//class FileStore extends Store
-//{
-//    function __construct(array $config, $lang)
-//    {
-//    }
-//
-//    public function getList($number = 0)
-//    {
-//    }
-//
-//    public function saveItem(array $data)
-//    {
-//    }
-//}
+//class FileStore extends Store {}

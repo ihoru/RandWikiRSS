@@ -9,6 +9,7 @@ $CONFIG['default_language'] = 'ru';
 $CONFIG['items_amount'] = 20; // Amount of articles to output
 $CONFIG['article_period'] = '+1 day'; // strtotime format
 $CONFIG['articles_amount'] = 1; // amount of random pages generated in a period
+$CONFIG['default_engine'] = 'pedia'; // pedia, quote
 $CONFIG['store_type'] = 'sqlite3'; // mysql, sqlite3, file
 $CONFIG['sqlite3'] = array(
     'dir'       => 'data/',
