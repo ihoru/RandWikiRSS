@@ -3,7 +3,7 @@
 Script lets you read new random articles from Wikipedia.org every day.
 
 ## How to use RandWikiRSS?
-You can visit <http://bloho.ru/RandWikiRSS/?lang=en> or add it to your favorite RSS-reader.
+You can visit <http://iho.su/RandWikiRSS/?lang=en> or add it to your favorite RSS-reader.
 
 Supported languages are: de, en, es, fr, it, nl, pl, ru, ceb, sv, vi, war (subdomain, i.e. ru.wikipedia.org)
 
